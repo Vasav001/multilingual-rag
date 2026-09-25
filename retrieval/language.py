@@ -27,32 +27,32 @@ LANGUAGE_NAMES = {
 }
 
 AUTO_DETECT = "auto"
-_MIN_CHARS_FOR_DETECTION = 20
-_MIN_CONFIDENCE = 0.7
+# _MIN_CHARS_FOR_DETECTION = 20
+# _MIN_CONFIDENCE = 0.7
 
 def detect_language(text: str) -> str:
     """Return a language code for `text`, defaulting to English on failure."""
-    # try:
-        # code = detect(text)
-    # except LangDetectException:
-    #     return "en"
-    # if code.startswith("zh"):
-    #     return "zh-cn"
-    # return code if code in LANGUAGE_NAMES else code
-
-    text = text.strip()
-    if len(text) < _MIN_CHARS_FOR_DETECTION:
-        return "en"
     try:
-        candidates = detect_langs(text)
+        code = detect(text)
     except LangDetectException:
         return "en"
-    if not candidates or candidates[0].prob < _MIN_CONFIDENCE:
-        return "en"
-    code = candidates[0].lang
     if code.startswith("zh"):
-        code = "zh-cn"
-    return code if code in LANGUAGE_NAMES else "en"
+        return "zh-cn"
+    return code if code in LANGUAGE_NAMES else code
+
+    # text = text.strip()
+    # if len(text) < _MIN_CHARS_FOR_DETECTION:
+    #     return "en"
+    # try:
+    #     candidates = detect_langs(text)
+    # except LangDetectException:
+    #     return "en"
+    # if not candidates or candidates[0].prob < _MIN_CONFIDENCE:
+    #     return "en"
+    # code = candidates[0].lang
+    # if code.startswith("zh"):
+    #     code = "zh-cn"
+    # return code if code in LANGUAGE_NAMES else "en"
 
 
 def language_name(code: str) -> str:

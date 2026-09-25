@@ -3,7 +3,7 @@ Language detection.
 dict of available output languages
 Detection is local thru langdetect
 """
-from langdetect import detect, LangDetectException
+from langdetect import detect, detect_langs, LangDetectException
 
 LANGUAGE_NAMES = {
     "en": "English",
@@ -33,7 +33,7 @@ _MIN_CONFIDENCE = 0.7
 def detect_language(text: str) -> str:
     """Return a language code for `text`, defaulting to English on failure."""
     # try:
-    #     code = detect(text)
+        # code = detect(text)
     # except LangDetectException:
     #     return "en"
     # if code.startswith("zh"):
